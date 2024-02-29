@@ -96,6 +96,7 @@ fun Counter() {
             Button(
                 // onClick = {},
                 onClick = { number++ },
+
                 modifier = Modifier
                     .fillMaxWidth(0.5f)
                     .padding(top = 16.dp),
