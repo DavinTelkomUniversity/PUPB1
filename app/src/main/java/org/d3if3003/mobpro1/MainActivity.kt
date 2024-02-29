@@ -20,7 +20,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.runtime.getValue
@@ -28,7 +27,11 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
-
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,8 +80,8 @@ fun MainScreen(content: @Composable (Modifier) -> Unit) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun Counter() {
     var number by remember { mutableIntStateOf(0) }
     MainScreen { modifier ->
@@ -89,23 +92,36 @@ fun Counter() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                // text = "0",
-                text = number.toString(),
-                style = MaterialTheme.typography.displayLarge
-            )
-            Button(
-                // onClick = {},
-                onClick = { number++ },
-
-                modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .padding(top = 16.dp),
-                contentPadding = PaddingValues(16.dp)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = stringResource(R.string.count))
+                Button(
+                    onClick = { if (number > 0) number-- },
+                    modifier = Modifier
+                        .padding(end = 30.dp)
+                        .size(50.dp)
+                        .background(color = MaterialTheme.colorScheme.secondary, shape = CircleShape),
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(text = "-")
+                }
+                Text(
+                    text = number.toString(),
+                    style = MaterialTheme.typography.displayLarge
+                )
+                Button(
+                    onClick = { number++ },
+                    modifier = Modifier
+                        .padding(start = 30.dp)
+                        .size(50.dp)
+                        .background(color = MaterialTheme.colorScheme.secondary, shape = CircleShape),
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(text = "+")
+                }
             }
-
         }
     }
 }
