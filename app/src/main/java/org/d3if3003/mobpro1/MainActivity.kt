@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.d3if3003.mobpro1.ui.theme.DavinTheme
+import org.d3if3003.mobpro1.model.Hewan
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
@@ -34,12 +35,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.runtime.mutableIntStateOf
+
 // DAVIN WAHYU WARDANA
 // 6706223003
 // D3IF-4603
 //
 
 class MainActivity : ComponentActivity() {
+
+    private val data = getData()
+    private var index by mutableIntStateOf(0)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -48,19 +55,28 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LampuApp()
+                    GaleriHewan(data[index]) {
+                        index = if (index == data.size-1) 0 else index+1
+                    }
                 }
             }
         }
     }
+
+    private fun getData(): List<Hewan> {
+        return listOf(
+            Hewan("Ayam", R.drawable.ayam),
+            Hewan("Bebek", R.drawable.bebek),
+            Hewan("Domba", R.drawable.domba),
+            Hewan("Kambing", R.drawable.kambing),
+            Hewan("Sapi", R.drawable.sapi),
+        )
+    }
 }
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LampuApp() {
-    var lampuOn by remember { mutableStateOf(false) }
-
+fun MainScreen(content: @Composable (Modifier) -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -73,33 +89,36 @@ fun LampuApp() {
                 )
             )
         }
-    ) {
+    ) { padding ->
+        content(Modifier.padding(padding))
+    }
+}
+
+@Composable
+fun GaleriHewan(hewan: Hewan, onClick: () -> Unit = {}) {
+    MainScreen { modifier ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
+            modifier = modifier.fillMaxSize().padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = if (lampuOn) painterResource(R.drawable.lampuon) else painterResource(R.drawable.lampuoff),
-                contentDescription = stringResource(R.string.gambar_lampu),
+                painter = painterResource(hewan.imagesResId),
+                contentDescription = stringResource(R.string.gambar, hewan.nama),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(132.dp)
             )
             Text(
-                text = if (lampuOn) "Lampu Hidup" else "Lampu Mati",
+                text = hewan.nama,
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.padding(top = 16.dp)
             )
             Button(
-                onClick = { lampuOn = !lampuOn },
-                modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .padding(top = 24.dp),
+                onClick = { onClick() },
+                modifier = Modifier.fillMaxWidth(0.5f).padding(top = 24.dp),
                 contentPadding = PaddingValues(16.dp)
             ) {
-                Text(text = if (lampuOn) "Matikan" else "Hidupkan")
+                Text(text = stringResource(R.string.lanjut))
             }
         }
     }
@@ -108,8 +127,8 @@ fun LampuApp() {
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
-fun LampuAppPreview() {
+fun ScreenPreview() {
     DavinTheme {
-        LampuApp()
+        GaleriHewan(Hewan("Ayam", R.drawable.ayam))
     }
 }
