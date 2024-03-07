@@ -40,7 +40,6 @@ import androidx.compose.runtime.mutableIntStateOf
 // DAVIN WAHYU WARDANA
 // 6706223003
 // D3IF-4603
-//
 
 class MainActivity : ComponentActivity() {
 
