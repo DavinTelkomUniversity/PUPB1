@@ -69,6 +69,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(content: @Composable (Modifier) -> Unit) {
