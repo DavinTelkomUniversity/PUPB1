@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Davin</string>
-    <string name="gambar_lampu" translatable="false" />
-    <string name="lanjut" translatable="false">Lanjut</string>
-    <string name="gambar" translatable="false" />
+    <string name="bmi_intro" translatable="false">BMI, atau Body Mass Index merupakan cara untuk menentukan apakah berat badanmu ideal atau tidak. Cobalah sekarang!</string>
+    <string name="berat_badan" translatable="false">Berat badan</string>
+    <string name="Tinggi_badan" translatable="false">Tinggi badan</string>
+    <string name="pria" translatable="false">Pria</string>
+    <string name="wanita" translatable="false">Wanita</string>
+    <string name="hitung" translatable="false">Hitung</string>
+    <string name="bmi_x" translatable="false">BMI: %1$.2f</string>
+    <string name="kurus" translatable="false">Kurus</string>
+    <string name="ideal" translatable="false">Ideal</string>
+    <string name="gemuk" translatable="false">Gemuk</string>
+    <string name="input_invalid" translatable="false">tidak boleh kosong</string>
 </resources>
