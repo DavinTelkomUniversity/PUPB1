@@ -136,6 +136,8 @@ fun  ScreenContent(modifier: Modifier) {
             radioOptions.forEach{ text->
                 GenderOption(label = text, isSelected = gender == text , modifier = Modifier
                     .selectable(
+
+
                         selected = gender == text,
                         onClick = { gender = text},
                         role = Role.RadioButton
