@@ -1,16 +1,17 @@
 package org.d3if3003.mobpro1
 
 import android.content.res.Configuration
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -21,6 +22,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -34,20 +36,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import org.d3if3003.mobpro1.ui.theme.DavinTheme
-// DAVIN WAHYU WARDANA
-// 6706223003
-// D3IF-4603
-
+import kotlin.math.pow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
-    Scaffold(
+    Scaffold (
         topBar = {
             TopAppBar(
                 title = {
@@ -65,20 +66,23 @@ fun MainScreen() {
 }
 
 @Composable
-fun ScreenContent(modifier: Modifier) {
-    var alas by remember { mutableStateOf("") }
-    var alasError by remember { mutableStateOf(false) }
-
-    var tinggi by remember { mutableStateOf("") }
-    var tinggiError by remember { mutableStateOf(false) }
-
-    var sisi by remember { mutableStateOf("") }
-    var sisiError by remember { mutableStateOf(false) }
-
-    var luas by remember { mutableStateOf(0f) }
-    var keliling by remember { mutableStateOf(0f) }
-
-    Column(
+fun  ScreenContent(modifier: Modifier) {
+    var berat by remember {
+        mutableStateOf("")
+    }
+    var beratError by remember {
+        mutableStateOf(false)
+    }
+    var tinggi by remember {
+        mutableStateOf("")
+    }
+    var tinggiError by remember {
+        mutableStateOf(false)
+    }
+    var kategori by remember {
+        mutableStateOf(0)
+    }
+    Column (
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
@@ -86,146 +90,56 @@ fun ScreenContent(modifier: Modifier) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = stringResource(id = R.string.jajar_genjang_intro),
+        Text(text = stringResource(id = R.string.bmi_intro),
             style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = berat, onValueChange = {berat = it},
+            label = { Text(text = stringResource(R.string.berat_badan))},
+            isError = beratError,
+            trailingIcon = { IconPicker(beratError, "kg")},
+            supportingText = { ErrorHint(beratError)},
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            ),
             modifier = Modifier.fillMaxWidth()
         )
-        Column {
-            OutlinedTextField(
-                value = alas,
-                onValueChange = {
-                    alas = it
-                },
-                label = { Text(text = "Alas") },
-                isError = alasError,
-                trailingIcon = { IconPicker(alasError, "cm") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
-                ),
-                modifier = Modifier.fillMaxWidth(),
-            )
-            if (alasError) {
-                Text(
-                    text = "Input alas tidak valid",
-                    color = Color.Red,
-                    modifier = Modifier.padding(start = 4.dp)
-                )
-            }
-        }
-
-        Column {
-            OutlinedTextField(
-                value = tinggi,
-                onValueChange = {
-                    tinggi = it
-                },
-                label = { Text(text = "Tinggi") },
-                isError = tinggiError,
-                trailingIcon = { IconPicker(tinggiError, "cm") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
-                ),
-                modifier = Modifier.fillMaxWidth(),
-            )
-            if (tinggiError) {
-                Text(
-                    text = "Input tinggi tidak valid",
-                    color = Color.Red,
-                    modifier = Modifier.padding(start = 4.dp)
-                )
-            }
-        }
-
-        Column {
-            OutlinedTextField(
-                value = sisi,
-                onValueChange = {
-                    sisi = it
-                },
-                label = { Text(text = "Sisi") },
-                isError = sisiError,
-                trailingIcon = { IconPicker(sisiError, "cm") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Done
-                ),
-                modifier = Modifier.fillMaxWidth(),
-            )
-            if (sisiError) {
-                Text(
-                    text = "Input sisi tidak valid",
-                    color = Color.Red,
-                    modifier = Modifier.padding(start = 4.dp)
-                )
-            }
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+        OutlinedTextField(value = tinggi, onValueChange = {tinggi = it},
+            label = { Text(text = stringResource(R.string.Tinggi_badan))},
+            isError = tinggiError,
+            trailingIcon = { IconPicker(tinggiError, "cm")},
+            supportingText = { ErrorHint(tinggiError)},
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+        Row (
+            modifier = Modifier
+                .padding(top = 6.dp)
+                .border(1.dp, Color.Gray, RoundedCornerShape(4.dp))
         ) {
-            Button(
-                onClick = {
-                    alasError = (alas == "" || alas == "0")
-                    tinggiError = (tinggi == "" || tinggi == "0")
-                    sisiError = (sisi == "" || sisi == "0")
-                    if (alasError || tinggiError || sisiError) return@Button
-
-                    val calculatedLuas = hitungLuas(alas.toFloat(), tinggi.toFloat())
-                    val calculatedKeliling = hitungKeliling(alas.toFloat(), tinggi.toFloat(), sisi.toFloat())
-
-                    luas = calculatedLuas
-                    keliling = calculatedKeliling
-
-                },
-                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(text = stringResource(R.string.hitung))
-            }
-
-            Spacer(modifier = Modifier.width(12.dp))
-
-            Button(
-                onClick = {
-                    alas = ""
-                    tinggi = ""
-                    sisi = ""
-                    luas = 0f
-                    keliling = 0f
-                },
-                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(text = "Reset")
+            radioOptions.forEach{ text->
+                GenderOption(label = text, isSelected = gender == text , modifier = Modifier
+                    .selectable(
+                        selected = gender == text,
+                        onClick = { gender = text},
+                        role = Role.RadioButton
+                    ))
             }
         }
-
-
-
-
-        if (luas != 0f || keliling != 0f) {
+        if (bmi != 0f) {
             Divider(
                 modifier = Modifier.padding(vertical = 8.dp),
                 thickness = 1.dp
             )
-            Text(
-                text = "Luas: $luas",
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(top = 8.dp)
-            )
-            Text(
-                text = "Keliling: $keliling",
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(top = 8.dp)
-            )
+            Text(text = stringResource(R.string.bmi_x, bmi),
+                style = MaterialTheme.typography.titleLarge)
+            Text(text = stringResource(kategori).uppercase(),
+                style = MaterialTheme.typography.headlineLarge)
         }
     }
 }
@@ -239,12 +153,36 @@ fun IconPicker(isError: Boolean, unit: String) {
     }
 }
 
-private fun hitungLuas(alas: Float, tinggi: Float): Float {
-    return alas * tinggi
+@Composable
+fun ErrorHint(isError: Boolean) {
+    if (isError) {
+        Text(text = stringResource(R.string.input_invalid))
+    }
 }
 
-private fun hitungKeliling(alas: Float, tinggi: Float, sisi: Float): Float {
-    return 2 * (alas + tinggi)
+
+private fun hitungBMI(berat: Float, tinggi: Float): Float {
+    return berat / (tinggi / 100).pow(2)
+}
+
+private fun getKategori(bmi: Float, isMale: Boolean): Int {
+    return if (isMale) {
+        when {
+            bmi < 20.5 -> R.string.kurus
+            bmi >= 27.0 -> R.string.gemuk
+            else -> R.string.ideal
+        }
+    } else {
+        when {
+            bmi < 18.5 -> R.string.kurus
+            bmi >= 25.0 -> R.string.gemuk
+            else -> R.string.ideal
+        }
+    }
+}
+@Composable
+fun Greeting(name: String) {
+    MainScreen()
 }
 
 @Preview(showBackground = true)
