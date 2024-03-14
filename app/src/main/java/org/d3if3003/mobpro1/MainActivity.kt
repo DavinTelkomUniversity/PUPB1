@@ -12,6 +12,7 @@ import org.d3if3003.mobpro1.ui.theme.DavinTheme
 // D3IF-4603
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
