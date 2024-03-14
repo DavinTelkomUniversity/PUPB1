@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -79,6 +80,16 @@ fun  ScreenContent(modifier: Modifier) {
     var tinggiError by remember {
         mutableStateOf(false)
     }
+    val radioOptions = listOf(
+        stringResource(id = R.string.pria),
+        stringResource(id = R.string.wanita)
+    )
+    var gender by remember {
+        mutableStateOf(radioOptions[0])
+    }
+    var bmi by remember {
+        mutableStateOf(0f)
+    }
     var kategori by remember {
         mutableStateOf(0)
     }
@@ -128,8 +139,23 @@ fun  ScreenContent(modifier: Modifier) {
                         selected = gender == text,
                         onClick = { gender = text},
                         role = Role.RadioButton
-                    ))
+                    )
+                    .weight(1f)
+                    .padding(16.dp)
+                )
             }
+        }
+        Button(onClick = {
+            beratError = (berat =="" || berat == "0")
+            tinggiError = (tinggi =="" || tinggi == "0")
+            if (beratError || tinggiError) return@Button
+            bmi = hitungBMI(berat.toFloat(), tinggi.toFloat())
+            kategori = getKategori(bmi, gender == radioOptions[0])
+        },
+            modifier = Modifier.padding(top = 8.dp),
+            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+        ) {
+            Text(text = stringResource(R.string.hitung))
         }
         if (bmi != 0f) {
             Divider(
@@ -160,6 +186,18 @@ fun ErrorHint(isError: Boolean) {
     }
 }
 
+@Composable
+fun GenderOption(label : String, isSelected: Boolean, modifier: Modifier) {
+    Row (
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(selected = isSelected, onClick = null)
+        Text(text = label,
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(start = 8.dp))
+    }
+}
 
 private fun hitungBMI(berat: Float, tinggi: Float): Float {
     return berat / (tinggi / 100).pow(2)
