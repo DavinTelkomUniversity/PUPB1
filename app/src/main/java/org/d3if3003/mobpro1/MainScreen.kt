@@ -307,6 +307,16 @@ private fun getKategori(bmi: Float, isMale: Boolean): Int {
         }
     }
 }
+private fun shareData(context: Context, message: String) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
+    if (shareIntent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(shareIntent)
+    }
+}
+
 @Composable
 fun Greeting(name: String) {
     MainScreen()
