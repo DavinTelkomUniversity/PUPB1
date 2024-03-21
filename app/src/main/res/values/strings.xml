@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Davin</string>
+    <string name="app_name">05-navigation</string>
     <string name="bmi_intro" translatable="false">BMI, atau Body Mass Index merupakan cara untuk menentukan apakah berat badanmu ideal atau tidak. Cobalah sekarang!</string>
     <string name="berat_badan" translatable="false">Berat badan</string>
     <string name="Tinggi_badan" translatable="false">Tinggi badan</string>

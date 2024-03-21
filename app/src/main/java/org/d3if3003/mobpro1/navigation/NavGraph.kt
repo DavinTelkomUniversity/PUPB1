@@ -5,8 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import org.d3if3003.mobpro1.ui.screen.AboutScreen
-import org.d3if3003.mobpro1.ui.screen.MainScreen
+import org.d3if3003.mobpro1.MainScreen
+import org.d3if3003.mobpro1.AboutScreen
+// DAVIN WAHYU WARDANA
+// 6706223003
+// D3IF-4603
 
 @Composable
 fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
