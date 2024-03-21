@@ -35,7 +35,8 @@ fun AboutScreen(navController: NavHostController) {
                             contentDescription = stringResource(R.string.kembali),
                             tint = MaterialTheme.colorScheme.primary
                         )
-                    }                },
+                    }
+                },
                 title = {
                     Text(text = stringResource(id = R.string.tentang_aplikasi))
                 },
