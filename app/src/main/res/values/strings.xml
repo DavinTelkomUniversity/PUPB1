@@ -11,4 +11,6 @@
     <string name="ideal" translatable="false">Ideal</string>
     <string name="gemuk" translatable="false">Gemuk</string>
     <string name="input_invalid" translatable="false">tidak boleh kosong</string>
+    <string name="tentang_aplikasi" translatable="false">Tentang Aplikasi</string>
+    <string name="copyright" translatable="false">Hitung BMI merupakan sebuah aplikasi Android untuk menghitung body mass index (BMI) sehingga seseorang dapat mengetahui apakah berat badannya ideat, gemuk atau kurus.\n\nAplikasi ini dibuat untuk kelas Mobpro 1 oleh Davin Wahyu Wardana.\n\nCopyright © 2021 - 2024 Davin Wardana.\nAll rights reserved.</string>
 </resources>
