@@ -1,10 +1,12 @@
 package org.d3if3003.mobpro1.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHostController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import org.d3if3003.mobpro1.ui.screen.AboutScreen
+import org.d3if3003.mobpro1.ui.screen.MainScreen
 
 @Composable
 fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
@@ -13,10 +15,10 @@ fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
         startDestination = Screen.Home.route
     ) {
         composable(route = Screen.Home.route) {
-            MainScreen()
+            MainScreen(navController)
         }
         composable(route = Screen.About.route) {
-            AboutScreen()
+            AboutScreen(navController)
         }
     }
 }
