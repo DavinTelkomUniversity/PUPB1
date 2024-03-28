@@ -26,13 +26,17 @@ import androidx.compose.ui.unit.dp
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.lifecycle.viewmodel.compose.viewModel
+import org.d3if3003.mobpro1.model.Catatan
+import org.d3if3003.mobpro1.ui.screen.MainViewModel
 import org.d3if3003.mobpro1.ui.theme.DavinTheme
 import kotlin.math.pow
+import androidx.lifecycle.viewmodel.compose.viewModel as viewModel1
+
 // DAVIN WAHYU WARDANA
 // 6706223003
 // D3IF-4603
@@ -75,7 +79,7 @@ fun MainScreen() {
 
 @Composable
 fun ScreenContent(modifier: Modifier) {
-    val viewModel: MainViewModel = viewModel()
+    val viewModel: MainViewModel = viewModel1()
     val data = viewModel.data
     val context = LocalContext.current
 
