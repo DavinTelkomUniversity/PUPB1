@@ -31,11 +31,10 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import org.d3if3003.mobpro1.model.Catatan
 import org.d3if3003.mobpro1.ui.screen.MainViewModel
 import org.d3if3003.mobpro1.ui.theme.DavinTheme
-import kotlin.math.pow
-import androidx.lifecycle.viewmodel.compose.viewModel as viewModel1
+import androidx.lifecycle.viewmodel.compose.viewModel
+import org.d3if3003.mobpro1.model.Mahasiswa
 
 // DAVIN WAHYU WARDANA
 // 6706223003
@@ -66,7 +65,7 @@ fun MainScreen() {
             ) {
                 Icon(
                     imageVector = Icons.Filled.Add,
-                    contentDescription = stringResource(R.string.tambah_catatan),
+                    contentDescription = stringResource(R.string.tambah_mahasiswa),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
@@ -80,7 +79,7 @@ fun MainScreen() {
 
 @Composable
 fun ScreenContent(modifier: Modifier) {
-    val viewModel: MainViewModel = viewModel1()
+    val viewModel: MainViewModel = viewModel()
     val data = viewModel.data
     val context = LocalContext.current
 
@@ -99,8 +98,8 @@ fun ScreenContent(modifier: Modifier) {
             contentPadding = PaddingValues(bottom = 84.dp)
         ) {
             items(data) {
-                ListItem(catatan = it) {
-                    val pesan = context.getString(R.string.x_diklik, it.judul)
+                ListItem(mahasiswa = it) {
+                    val pesan = context.getString(R.string.x_diklik, it.nama)
                     Toast.makeText(context, pesan, Toast.LENGTH_SHORT).show()
                 }
                 Divider()
@@ -110,7 +109,7 @@ fun ScreenContent(modifier: Modifier) {
 }
 
 @Composable
-fun ListItem(catatan: Catatan, onClick: () -> Unit) {
+fun ListItem(mahasiswa: Mahasiswa, onClick: () -> Unit) {
     Column (
         modifier = Modifier.fillMaxWidth()
             .clickable { onClick() }
@@ -118,17 +117,17 @@ fun ListItem(catatan: Catatan, onClick: () -> Unit) {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
-            text = catatan.judul,
+            text = mahasiswa.nama,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = catatan.catatan,
+            text = mahasiswa.nim,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
-        Text(text = catatan.tanggal)
+        Text(text = mahasiswa.kelas)
     }
 }
 

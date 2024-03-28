@@ -1,24 +1,17 @@
 package org.d3if3003.mobpro1.ui.screen
 
 import androidx.lifecycle.ViewModel
-import org.d3if3003.mobpro1.model.Catatan
+import org.d3if3003.mobpro1.model.Mahasiswa
 
 class MainViewModel : ViewModel() {
-
     val data = getDataDummy()
-
-    private fun getDataDummy(): List<Catatan> {
-        val data = mutableListOf<Catatan>()
-        for (i in 29 downTo 20 ) {
-            data.add(
-                Catatan(
-                    i.toLong(),
-                    "Kuliah Mobpro $i Feb",
-                    "Yey, hari ini belajar membuat aplikasi Android counter dan berhasil. Hehe.. Mudah2an modul selanjutnya juga lancar. Aamiin.",
-                    "2024-02-$i 12:34:56"
-                )
-            )
-        }
+    private fun getDataDummy(): List<Mahasiswa> {
+        val data = mutableListOf<Mahasiswa>()
+        data.add(Mahasiswa("Davin Wahyu Wardana", "6706223003", "D3IF-46-03"))
+        data.add(Mahasiswa("Muhammad Risqi Briliansyah", "6706223004", "D3IF-46-03"))
+        data.add(Mahasiswa("Ghina Salsabilla Zulin", "6706223005", "D3IF-46-03"))
+        data.add(Mahasiswa("Adhisty Nayyara Ramadhanti", "6706223006", "D3IF-46-03"))
+        data.add(Mahasiswa("Muhammad Faris Akbar", "6706223007", "D3IF-46-03"))
         return data
     }
 }

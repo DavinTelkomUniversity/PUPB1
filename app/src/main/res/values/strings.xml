@@ -2,6 +2,6 @@
     <string name="app_name">Davin</string>
     <string name="list_kosong">Belum ada data</string>
     <string name="x_diklik">$1%s di klik!</string>
-    <string name="tambah_catatan">Tambah Catatan</string>
-    <string name="belum_bisa">Belum Bisa Menambah Catatan</string>
+    <string name="tambah_mahasiswa">Tambah Mahasiswa</string>
+    <string name="belum_bisa">Belum Bisa Menambah Mahasiswa</string>
 </resources>
