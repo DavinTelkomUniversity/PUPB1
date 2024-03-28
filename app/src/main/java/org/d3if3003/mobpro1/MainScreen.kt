@@ -80,7 +80,15 @@ fun ScreenContent(modifier: Modifier) {
     val context = LocalContext.current
 
 
-
+    if (data.isEmpty()) {
+        Column(
+            modifier = modifier.fillMaxSize().padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = stringResource(id = R.string.list_kosong))
+        }
+    } else {
         LazyColumn(
             modifier = modifier.fillMaxSize(),
             contentPadding = PaddingValues(bottom = 84.dp)
@@ -93,7 +101,7 @@ fun ScreenContent(modifier: Modifier) {
                 Divider()
             }
         }
-
+    }
 }
 
 @Composable
