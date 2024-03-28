@@ -3,5 +3,5 @@
     <string name="list_kosong">Belum ada data</string>
     <string name="x_diklik">%s di klik!</string>
     <string name="tambah_mahasiswa">Tambah Mahasiswa</string>
-    <string name="belum_bisa">Belum Bisa Menambah Mahasiswa-M</string>
+    <string name="belum_bisa">Belum Bisa Menambah Mahasiswa</string>
 </resources>
